@@ -41,8 +41,21 @@ import base64
 if st.button("Generate Question"):
     with st.spinner("Thinking... 🧠"):
         response = client.chat.completions.create(
-            ...
-        )
+    model="gpt-4o",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant that creates technical interview questions based on job role and category."
+        },
+        {
+            "role": "user",
+            "content": prompt_template.format(role=role, category=category)
+        }
+    ],
+    temperature=0.7
+)
+
+
     question = response.choices[0].message.content
     st.markdown("### 🛠️ Your Interview Question:")
     st.write(question)
