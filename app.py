@@ -62,10 +62,6 @@ if st.button("Generate Question"):
     st.code(question, language="markdown")
     st.button("📋 Copy to Clipboard", key="copy_btn")
     # ✅ CORRECT: only used after 'question' is created
-    st.markdown(generate_download_link(question, "interview_question.txt"), unsafe_allow_html=True)
-
-
-
 def generate_download_link(text, filename):
     buffer = io.StringIO()
     buffer.write(text)
@@ -73,6 +69,12 @@ def generate_download_link(text, filename):
     b64 = base64.b64encode(buffer.read().encode()).decode()
     href = f'<a href="data:file/txt;base64,{b64}" download="{filename}">📥 Download as .txt</a>'
     return href
+
+    st.markdown(generate_download_link(question, "interview_question.txt"), unsafe_allow_html=True)
+
+
+
+
 
 # Answer input
 user_answer = st.text_area("✍️ Your Answer", placeholder="Write your answer here...")
