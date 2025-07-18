@@ -116,7 +116,14 @@ if st.button("📨 Send to My Email"):
     else:
         st.success(f"✅ Session will be sent to {email.strip()} (feature coming soon!)")
         file_name = f"{role}_{category}_session.txt".replace(" ", "_")
-        st.markdown(generate_download_link(session_log, file_name), unsafe_allow_html=True)
+        import base64
+
+def generate_download_link(content, filename):
+    b64 = base64.b64encode(content.encode()).decode()
+    href = f'<a href="data:file/txt;base64,{b64}" download="{filename}">📄 Download Question as .txt</a>'
+    return href
+
+    st.markdown(generate_download_link(question, file_name), unsafe_allow_html=True)
 
 
 
